@@ -42,7 +42,7 @@ class Unzip {
 	private $dir_signature = "\x50\x4b\x01\x02";
 
 	// central dir header signature
-	private $dir_signatureE = "\x50\x4b\x05\x06";
+	private $central_signature = "\x50\x4b\x05\x06";
 
 	// ignore these directories (useless meta data)
 	private $_skip_dirs = array('__MACOSX');
@@ -348,7 +348,8 @@ class Unzip {
 	 */
 	private function _uncompress($content, $mode, $uncompressed_size, $target_file_name=FALSE)
 	{
-		switch ($mode) {
+		switch ($mode)
+		{
 			case 0:
 				return $target_file_name ? file_put_contents($target_file_name, $content) : $content;
 			case 1:
