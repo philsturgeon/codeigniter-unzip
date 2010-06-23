@@ -33,9 +33,3 @@ To-do
 -----
 
 - Add extract_file() to extract a specific file from your ZIP.
-
-
-Extra
------
-
-If you'd like to request changes or  report a big, please use the issue tracker.
