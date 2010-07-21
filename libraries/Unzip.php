@@ -42,7 +42,7 @@ class Unzip {
 	private $dir_signature = "\x50\x4b\x01\x02";
 
 	// central dir header signature
-	private $central_signature = "\x50\x4b\x05\x06";
+	private $central_signature_end = "\x50\x4b\x05\x06";
 
 	// ignore these directories (useless meta data)
 	private $_skip_dirs = array('__MACOSX');
@@ -346,7 +346,7 @@ class Unzip {
 	 * @param     Filecontent, int, int, boolean
 	 * @return    none
 	 */
-	private function _uncompress($content, $mode, $uncompressed_size, $target_file_name=FALSE)
+	private function _uncompress($content, $mode, $uncompressed_size, $target_file_name = FALSE)
 	{
 		switch ($mode)
 		{
@@ -392,7 +392,7 @@ class Unzip {
 		}
 	}
 
-	private function _load_file_list_by_eof(&$fh, $stop_on_file=FALSE)
+	private function _load_file_list_by_eof(&$fh, $stop_on_file = FALSE)
 	{
 		// Check if there's a valid Central Dir signature.
 		// Let's consider a file comment smaller than 1024 characters...
@@ -404,7 +404,7 @@ class Unzip {
 
 			$signature = fread($fh, 4);
 
-			if ($signature == $this->dir_signatureE)
+			if ($signature == $this->central_signature_end)
 			{
 				// If found EOF Central Dir
 				$eodir['disk_number_this'] = unpack("v", fread($fh, 2)); // number of this disk
