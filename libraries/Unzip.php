@@ -83,6 +83,7 @@ class Unzip {
 			return FALSE;
 		}
 
+		$file_locations = array();
 		foreach ($files as $file => $trash)
 		{
 			$dirname = pathinfo($file, PATHINFO_DIRNAME);
@@ -130,10 +131,12 @@ class Unzip {
 				continue;
 			}
 
-			$preserve_filepath ? $this->_extract_file($file, $this->_target_dir . '/' . $file) : $this->_extract_file($file, $this->_target_dir . '/' . basename($file));
+			$file_locations[] = $file_location = $this->_target_dir . '/' . ($preserve_filepath ? $file : basename($file));
+
+			$this->_extract_file($file, $file_location);
 		}
 
-		return TRUE;
+		return $file_locations;
 	}
 
 	// --------------------------------------------------------------------
