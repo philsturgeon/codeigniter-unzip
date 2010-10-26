@@ -16,7 +16,7 @@
  * @author		Alexandre Tedeschi
  * @author		Phil Sturgeon
  * @link		http://bitbucket.org/philsturgeon/codeigniter-unzip
- * @license        http://www.gnu.org/licenses/lgpl.html
+ * @license     
  * @version     1.0.0
  */
 class Unzip {
@@ -99,12 +99,12 @@ class Unzip {
 			}
 
 			// Skip any files that are not allowed
-			if (is_array($this->_allow_extensions) && $extension && ! in_array($extension, $this->_allow_extensions))
+			if (is_array($this->_allow_extensions) AND $extension AND ! in_array($extension, $this->_allow_extensions))
 			{
 				continue;
 			}
 
-			if ( ! is_dir($out_dn) && $preserve_filepath)
+			if ( ! is_dir($out_dn) AND $preserve_filepath)
 			{
 				$str = "";
 				foreach ($folders as $folder)
@@ -121,15 +121,12 @@ class Unzip {
 						}
 
 						// Apply chmod if configured to do so
-						$this->apply_chmod && chmod($this->_target_dir . '/' . $str, $this->apply_chmod);
+						$this->apply_chmod AND chmod($this->_target_dir . '/' . $str, $this->apply_chmod);
 					}
 				}
 			}
 
-			if (substr($file, -1, 1) == '/')
-			{
-				continue;
-			}
+			if (substr($file, -1, 1) == '/') continue;
 
 			$file_locations[] = $file_location = $this->_target_dir . '/' . ($preserve_filepath ? $file : basename($file));
 
@@ -300,7 +297,7 @@ class Unzip {
 			$target_file_name
 		);
 
-		if ($this->apply_chmod && $target_file_name)
+		if ($this->apply_chmod AND $target_file_name)
 		{
 			chmod($target_file_name, FILE_READ_MODE);
 		}
@@ -497,6 +494,7 @@ class Unzip {
 					foreach ($this->central_dir_list as $filename => $details)
 					{
 						$i = $this->_get_file_header($fh, $details['relative_offset']);
+						
 						$this->compressed_list[$filename]['file_name'] = $filename;
 						$this->compressed_list[$filename]['compression_method'] = $details['compression_method'];
 						$this->compressed_list[$filename]['version_needed'] = $details['version_needed'];
@@ -515,7 +513,7 @@ class Unzip {
 					}
 				}
 
-				return true;
+				return TRUE;
 			}
 		}
 		return FALSE;
@@ -615,9 +613,9 @@ class Unzip {
 
 			return $i;
 		}
+
 		return FALSE;
 	}
-
 }
 
 /* End of file Unzip.php */
