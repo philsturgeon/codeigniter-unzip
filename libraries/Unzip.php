@@ -133,6 +133,8 @@ class Unzip {
 			$this->_extract_file($file, $file_location);
 		}
 
+		$this->compressed_list = array();
+
 		return $file_locations;
 	}
 
