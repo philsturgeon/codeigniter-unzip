@@ -15,6 +15,7 @@
  * @category	Encryption
  * @author		Alexandre Tedeschi
  * @author		Phil Sturgeon
+ * @author		Don Myers
  * @link		http://bitbucket.org/philsturgeon/codeigniter-unzip
  * @license     
  * @version     1.0.0
@@ -66,6 +67,21 @@ class Unzip {
 	// --------------------------------------------------------------------
 
 	/**
+	 * re inizilize all variables
+	 * @access	Private
+	 * @param		none
+	 * @return	none
+	 */
+	private function _reinit()
+	{
+		$this->compressed_list = array();
+		$this->central_dir_list = array();
+		$this->end_of_central = array();
+		$this->info = array();
+		$this->error = array();
+	}
+
+	/**
 	 * Unzip all files in archive.
 	 *
 	 * @access    Public
@@ -74,6 +90,7 @@ class Unzip {
 	 */
 	public function extract($zip_file, $target_dir = NULL, $preserve_filepath = TRUE)
 	{
+		$this->_reinit();
 		$this->_zip_file = $zip_file;
 		$this->_target_dir = $target_dir ? $target_dir : dirname($this->_zip_file);
 
