@@ -24,7 +24,7 @@ Usage
     $this->unzip->extract('uploads/my_archive.zip');
 
     // or specify a destination directory
-    $this->unzip->extract('uploads/my_archive.zip', '/path/to/directory/);
+    $this->unzip->extract('uploads/my_archive.zip', '/path/to/directory/');
 
 Simple as that!
 
